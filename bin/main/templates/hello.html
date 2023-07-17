@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+	<title>Hello World!</title>
+	<style>
+		table,
+		th,
+		td {
+			border: 1px solid black;
+			border-collapse: collapse;
+		}
+
+		th {
+			width: 10em;
+		}
+
+		td {
+			text-align: center;
+		}
+
+		.containerStyle {
+			padding-bottom: 20px;
+			padding-left: 2%;
+			margin-left: 20%;
+			margin-top: 2%;
+			width: 50%;
+			border: 1px solid black;
+			border-radius: 4%;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="containerStyle">
+		<h1 th:inline="text">Hello <span th:remove="tag" sec:authentication="name">thymeleaf</span>!</h1>
+
+		<div sec:authorize="isAuthenticated()">
+			isAuthenticated: TRUE
+			<div sec:authorize="hasRole('USER')">hasRole('USER'): TRUE</div>
+			<div sec:authorize="hasRole('ADMIN')">hasRole('ADMIN'): TRUE</div>
+		</div>
+
+		<br />
+		<table>
+			<tr>
+				<th>Description</th>
+				<th>Value</th>
+			</tr>
+
+			<tr>
+				<td>Authenticated username </td>
+				<td>
+					<div sec:authentication="name"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>Authenticated role(s) </td>
+				<td>
+					<div sec:authentication="principal.authorities"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>Authenticated details </td>
+				<td>
+					<div sec:authentication="principal"></div>
+				</td>
+			</tr>
+
+		</table>
+		<br />
+		<form th:action="@{/logout}" method="post">
+			<!--<input type="submit" value="Sign Out" />-->
+			<input type="submit" value="Log Off" />
+		</form>
+	</div>
+</body>
+
+
+</html>

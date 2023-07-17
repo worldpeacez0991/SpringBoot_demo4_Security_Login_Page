@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+	<title>Spring Security Example </title>
+	<style>
+		.labelFixWidth {
+			display: inline-block;
+			width: 5em;
+			padding: 5px;
+		}
+
+		.errorStyle {
+			color: red;
+			padding: 0;
+			margin-left: 5px;
+			margin-top: 3px;
+			margin-bottom: 0px;
+		}
+
+		.logOutStyle {
+			color: black;
+			padding: 0;
+			margin-left: 5px;
+			margin-top: 3px;
+			margin-bottom: 0px;
+		}
+
+
+		.marginleft {
+			margin-left: 5px;
+		}
+
+		input {
+			width: 8em;
+			
+		}
+
+		.buttonStyle {
+			width: 5em;
+			margin-top: 5px;
+			margin-left: 5px;
+		}
+
+		.containerStyle {
+			padding-top: 20px;
+			padding-left: 5%;
+			margin-left: 30%;
+			margin-top: 5%;
+			width: 30%;
+			border: 1px solid black;
+			border-radius: 4%;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="containerStyle">
+		<form th:action="@{/login}" method="post">
+			<div class="labelFixWidth">
+				<label for="username">Username</label>
+			</div><input type="text" id="username" name="username" autofocus="autofocus" />
+
+			<br />
+			<div class="labelFixWidth">
+				<label for="password">Password</label>
+			</div><input type="password" id="password" name="password" />
+			<br />
+			<div th:if="${param.error}">
+				<h5 class="errorStyle">Error: Invalid username and password.</h5><br />
+			</div>
+			<div th:if="${param.logout}">
+				<h5 class="logOutStyle">You have been logged out.</h5><br />
+			</div>
+
+			<input class="buttonStyle" type="submit" value="Log in" />
+		</form>
+
+		<h5 class="marginleft">Credentials:
+			<ol style="margin: 5px">
+				<li>user/password</li>
+				<li>admin/admin</li>
+			</ol>
+		</h5>
+	</div>
+
+</body>
+
+</html>
